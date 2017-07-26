@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 <a name="createPromptBot"></a>
 # **createPromptBot**
-> PromptBotBot createPromptBot(listId, emailId, endDate, promptSubject, promptBody, botTypeId, templateId)
+> PromptBot createPromptBot(listId, emailId, name, subject, content, contactFieldValueColumn, botTypeId, templateId, videoId, endDate)
 
 Create a running Prompt Bot for a list
 
@@ -42,13 +42,16 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 PromptsApi apiInstance = new PromptsApi();
 String listId = "listId_example"; // String | The list id to attach the bot to.
 String emailId = "emailId_example"; // String | The default email to use.
-String endDate = "endDate_example"; // String | The time frame to complete sending to the list.
-String promptSubject = "promptSubject_example"; // String | The prompt subject.
-String promptBody = "promptBody_example"; // String | The prompt script.
+String name = "name_example"; // String | The name of the bot.
+String subject = "subject_example"; // String | The subject of the default email.
+String content = "content_example"; // String | The content used in the email.
+String contactFieldValueColumn = "contactFieldValueColumn_example"; // String | The custom field value column with dates for this bot.
 String botTypeId = "botTypeId_example"; // String | The type of bot to create.
 String templateId = "templateId_example"; // String | The template used to create the email id.
+String videoId = "videoId_example"; // String | The video used in the email.
+String endDate = "endDate_example"; // String | The time frame to complete sending to the list.
 try {
-    PromptBotBot result = apiInstance.createPromptBot(listId, emailId, endDate, promptSubject, promptBody, botTypeId, templateId);
+    PromptBot result = apiInstance.createPromptBot(listId, emailId, name, subject, content, contactFieldValueColumn, botTypeId, templateId, videoId, endDate);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling PromptsApi#createPromptBot");
@@ -62,15 +65,18 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **listId** | **String**| The list id to attach the bot to. |
  **emailId** | **String**| The default email to use. |
- **endDate** | **String**| The time frame to complete sending to the list. |
- **promptSubject** | **String**| The prompt subject. |
- **promptBody** | **String**| The prompt script. |
+ **name** | **String**| The name of the bot. |
+ **subject** | **String**| The subject of the default email. |
+ **content** | **String**| The content used in the email. |
+ **contactFieldValueColumn** | **String**| The custom field value column with dates for this bot. |
  **botTypeId** | **String**| The type of bot to create. |
  **templateId** | **String**| The template used to create the email id. |
+ **videoId** | **String**| The video used in the email. | [optional]
+ **endDate** | **String**| The time frame to complete sending to the list. | [optional]
 
 ### Return type
 
-[**PromptBotBot**](PromptBotBot.md)
+[**PromptBot**](PromptBot.md)
 
 ### Authorization
 
@@ -185,7 +191,7 @@ This endpoint does not need any parameter.
 
 <a name="getPromptBots"></a>
 # **getPromptBots**
-> List&lt;PromptBotBot&gt; getPromptBots()
+> List&lt;PromptBot&gt; getPromptBots()
 
 List Prompt Bots
 
@@ -208,7 +214,7 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 PromptsApi apiInstance = new PromptsApi();
 try {
-    List<PromptBotBot> result = apiInstance.getPromptBots();
+    List<PromptBot> result = apiInstance.getPromptBots();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling PromptsApi#getPromptBots");
@@ -221,7 +227,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;PromptBotBot&gt;**](PromptBotBot.md)
+[**List&lt;PromptBot&gt;**](PromptBot.md)
 
 ### Authorization
 
@@ -384,7 +390,7 @@ This endpoint does not need any parameter.
 
 <a name="respondToVideoEmailPrompt"></a>
 # **respondToVideoEmailPrompt**
-> VideoEmailPrompt respondToVideoEmailPrompt(id, choice, videoId, emailId)
+> VideoEmailPrompt respondToVideoEmailPrompt(id, choice, videoId, emailId, subject)
 
 Respond to a prompt
 
@@ -399,11 +405,12 @@ Respond to a prompt by either adding a video, sending without a video or cancell
 
 PromptsApi apiInstance = new PromptsApi();
 String id = "id_example"; // String | The id of the prompt.
-String choice = "choice_example"; // String | The users' selection. Can be: WithVideo, WithEmail, Cancel
+String choice = "choice_example"; // String | The users' selection. Can be: WithVideo, WithEmail, Cancel, Restore, Reset, Manual
 String videoId = "videoId_example"; // String | The id of the video.
-String emailId = "emailId_example"; // String | The id of the video.
+String emailId = "emailId_example"; // String | The id of the email.
+String subject = "subject_example"; // String | The subject of the email
 try {
-    VideoEmailPrompt result = apiInstance.respondToVideoEmailPrompt(id, choice, videoId, emailId);
+    VideoEmailPrompt result = apiInstance.respondToVideoEmailPrompt(id, choice, videoId, emailId, subject);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling PromptsApi#respondToVideoEmailPrompt");
@@ -416,9 +423,10 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| The id of the prompt. |
- **choice** | **String**| The users&#39; selection. Can be: WithVideo, WithEmail, Cancel | [enum: WithVideo, WithEmail, Cancel]
+ **choice** | **String**| The users&#39; selection. Can be: WithVideo, WithEmail, Cancel, Restore, Reset, Manual | [enum: WithVideo, WithEmail, Cancel, Restore, Reset, Manual]
  **videoId** | **String**| The id of the video. | [optional]
- **emailId** | **String**| The id of the video. | [optional]
+ **emailId** | **String**| The id of the email. | [optional]
+ **subject** | **String**| The subject of the email | [optional]
 
 ### Return type
 
@@ -435,7 +443,7 @@ No authorization required
 
 <a name="updatePromptBot"></a>
 # **updatePromptBot**
-> PromptBotBot updatePromptBot(id, emailId, endDate, status)
+> PromptBot updatePromptBot(id, listId, emailId, name, subject, content, contactFieldValueColumn, templateId, videoId, endDate, status)
 
 Update Prompt Bot
 
@@ -458,11 +466,18 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 PromptsApi apiInstance = new PromptsApi();
 String id = "id_example"; // String | The bot id.
+String listId = "listId_example"; // String | The list id to attach the bot to.
 String emailId = "emailId_example"; // String | The default email to use.
+String name = "name_example"; // String | The name of the bot.
+String subject = "subject_example"; // String | The subject of the default email.
+String content = "content_example"; // String | The content used in the default email.
+String contactFieldValueColumn = "contactFieldValueColumn_example"; // String | The custom field value column with dates for this bot.
+String templateId = "templateId_example"; // String | The template used to create the email id.
+String videoId = "videoId_example"; // String | The video used in the default email.
 String endDate = "endDate_example"; // String | The time frame to complete sending to the list.
 String status = "status_example"; // String | The status of the bot.
 try {
-    PromptBotBot result = apiInstance.updatePromptBot(id, emailId, endDate, status);
+    PromptBot result = apiInstance.updatePromptBot(id, listId, emailId, name, subject, content, contactFieldValueColumn, templateId, videoId, endDate, status);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling PromptsApi#updatePromptBot");
@@ -475,13 +490,20 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| The bot id. |
- **emailId** | **String**| The default email to use. | [optional]
+ **listId** | **String**| The list id to attach the bot to. |
+ **emailId** | **String**| The default email to use. |
+ **name** | **String**| The name of the bot. |
+ **subject** | **String**| The subject of the default email. |
+ **content** | **String**| The content used in the default email. |
+ **contactFieldValueColumn** | **String**| The custom field value column with dates for this bot. |
+ **templateId** | **String**| The template used to create the email id. |
+ **videoId** | **String**| The video used in the default email. | [optional]
  **endDate** | **String**| The time frame to complete sending to the list. | [optional]
  **status** | **String**| The status of the bot. | [optional]
 
 ### Return type
 
-[**PromptBotBot**](PromptBotBot.md)
+[**PromptBot**](PromptBot.md)
 
 ### Authorization
 
@@ -494,7 +516,7 @@ Name | Type | Description  | Notes
 
 <a name="updatePromptCampaign"></a>
 # **updatePromptCampaign**
-> updatePromptCampaign(clientGroupId, brandedTemplateId, personalTemplateId, enabled)
+> updatePromptCampaign(clientGroupId, brandedTemplateId, personalTemplateId, enabled, autoShares)
 
 Update Prompt Campaign
 
@@ -520,8 +542,9 @@ String clientGroupId = "clientGroupId_example"; // String | The client group of 
 String brandedTemplateId = "brandedTemplateId_example"; // String | The template to use for branded feel emails.
 String personalTemplateId = "personalTemplateId_example"; // String | The template to use for personal feel emails.
 Boolean enabled = true; // Boolean | Set whether the user is able to start receiving prompts.
+String autoShares = "autoShares_example"; // String | These are what we are autosharing to
 try {
-    apiInstance.updatePromptCampaign(clientGroupId, brandedTemplateId, personalTemplateId, enabled);
+    apiInstance.updatePromptCampaign(clientGroupId, brandedTemplateId, personalTemplateId, enabled, autoShares);
 } catch (ApiException e) {
     System.err.println("Exception when calling PromptsApi#updatePromptCampaign");
     e.printStackTrace();
@@ -536,6 +559,7 @@ Name | Type | Description  | Notes
  **brandedTemplateId** | **String**| The template to use for branded feel emails. | [optional]
  **personalTemplateId** | **String**| The template to use for personal feel emails. | [optional]
  **enabled** | **Boolean**| Set whether the user is able to start receiving prompts. | [optional]
+ **autoShares** | **String**| These are what we are autosharing to | [optional]
 
 ### Return type
 

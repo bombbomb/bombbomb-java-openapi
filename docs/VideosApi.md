@@ -4,10 +4,64 @@ All URIs are relative to *https://api.bombbomb.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getVideoEncodingStatus**](VideosApi.md#getVideoEncodingStatus) | **GET** /videos/{videoId}/status | Video Encoding Status
 [**getVideoRecorder**](VideosApi.md#getVideoRecorder) | **GET** /videos/live/getRecorder | Get Live Video Recorder HTML
 [**markLiveRecordingComplete**](VideosApi.md#markLiveRecordingComplete) | **POST** /videos/live/markComplete | Completes a live recording
 [**signUpload**](VideosApi.md#signUpload) | **POST** /video/signedUpload | Generate Signed Url
 
+
+<a name="getVideoEncodingStatus"></a>
+# **getVideoEncodingStatus**
+> VideoEncodingStatusResponse getVideoEncodingStatus(videoId)
+
+Video Encoding Status
+
+Get information about the current state of encoding for a given video id.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.VideosApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+VideosApi apiInstance = new VideosApi();
+String videoId = "videoId_example"; // String | The video's id.
+try {
+    VideoEncodingStatusResponse result = apiInstance.getVideoEncodingStatus(videoId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling VideosApi#getVideoEncodingStatus");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **videoId** | **String**| The video&#39;s id. |
+
+### Return type
+
+[**VideoEncodingStatusResponse**](VideoEncodingStatusResponse.md)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
 
 <a name="getVideoRecorder"></a>
 # **getVideoRecorder**

@@ -23,29 +23,38 @@
  */
 
 
-package io.swagger.client;
+package io.swagger.client.api;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-07-26T15:26:36.973Z")
-public class Configuration {
-    private static ApiClient defaultApiClient = new ApiClient();
+import io.swagger.client.ApiException;
+import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * API tests for ContactsApi
+ */
+public class ContactsApiTest {
+
+    private final ContactsApi api = new ContactsApi();
+
+    
     /**
-     * Get the default API client, which would be used when creating API
-     * instances without providing an API client.
+     * Delete Contacts
      *
-     * @return Default API client
+     * Delete contacts
+     *
+     * @throws ApiException
+     *          if the Api call fails
      */
-    public static ApiClient getDefaultApiClient() {
-        return defaultApiClient;
-    }
+    @Test
+    public void deleteContactsTest() throws ApiException {
+        String listId = null;
+        // api.deleteContacts(listId);
 
-    /**
-     * Set the default API client, which would be used when creating API
-     * instances without providing an API client.
-     *
-     * @param apiClient API client
-     */
-    public static void setDefaultApiClient(ApiClient apiClient) {
-        defaultApiClient = apiClient;
+        // TODO: test validations
     }
+    
 }

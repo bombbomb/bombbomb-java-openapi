@@ -8,13 +8,16 @@ Method | HTTP request | Description
 [**cancelJerichoSend**](TeamsApi.md#cancelJerichoSend) | **DELETE** /team/{teamId}/jericho/{jerichoId} | Cancel a Jericho Send
 [**createSubteam**](TeamsApi.md#createSubteam) | **POST** /team/{teamId}/subteam | Add a Subteam
 [**deleteSubteam**](TeamsApi.md#deleteSubteam) | **DELETE** /team/{teamId}/subteam | Delete Subteam
+[**getAllClientGroupAssociations**](TeamsApi.md#getAllClientGroupAssociations) | **GET** /team/associations/ | Lists team associations
 [**getClientGroupAssets**](TeamsApi.md#getClientGroupAssets) | **GET** /team/assets/ | Lists team assets
 [**getJerichoSends**](TeamsApi.md#getJerichoSends) | **GET** /team/{teamId}/jericho | List Jericho Sends
 [**getJerichoStats**](TeamsApi.md#getJerichoStats) | **GET** /team/{teamId}/jericho/{jerichoId}/performance | Gets Jericho performance statistics
 [**getSubteams**](TeamsApi.md#getSubteams) | **GET** /team/{teamId}/subteam | List Subteams
 [**queueJerichoSend**](TeamsApi.md#queueJerichoSend) | **POST** /team/{teamId}/jericho | Creates a Jericho send.
 [**removeMemberFromTeam**](TeamsApi.md#removeMemberFromTeam) | **DELETE** /team/{teamId}/member/{userId} | Remove Member from Team
+[**updateJerichoPromptSend**](TeamsApi.md#updateJerichoPromptSend) | **PUT** /team/{teamId}/jericho/{jerichoId} | Updates the Jericho Prompt Settings
 [**updateTeam**](TeamsApi.md#updateTeam) | **POST** /team/{teamId} | Update a team
+[**updateTeamMember**](TeamsApi.md#updateTeamMember) | **PUT** /team/{teamId}/member | Update Member of Team
 
 
 <a name="addTeamMember"></a>
@@ -228,6 +231,58 @@ Name | Type | Description  | Notes
 ### Return type
 
 **String**
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="getAllClientGroupAssociations"></a>
+# **getAllClientGroupAssociations**
+> getAllClientGroupAssociations(clientId)
+
+Lists team associations
+
+Returns a collection of team associations for a given user
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String clientId = "clientId_example"; // String | The clientId requesting group associations.
+try {
+    apiInstance.getAllClientGroupAssociations(clientId);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#getAllClientGroupAssociations");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **clientId** | **String**| The clientId requesting group associations. |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
@@ -572,6 +627,60 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
+<a name="updateJerichoPromptSend"></a>
+# **updateJerichoPromptSend**
+> updateJerichoPromptSend(teamId, jerichoId)
+
+Updates the Jericho Prompt Settings
+
+Updates the prompt settings based on the original email id
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String teamId = "teamId_example"; // String | The team id
+String jerichoId = "jerichoId_example"; // String | ID of the Jericho job
+try {
+    apiInstance.updateJerichoPromptSend(teamId, jerichoId);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#updateJerichoPromptSend");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **teamId** | **String**| The team id |
+ **jerichoId** | **String**| ID of the Jericho job |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 <a name="updateTeam"></a>
 # **updateTeam**
 > TeamPublicRepresentation updateTeam(teamId, name)
@@ -617,6 +726,62 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TeamPublicRepresentation**](TeamPublicRepresentation.md)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="updateTeamMember"></a>
+# **updateTeamMember**
+> updateTeamMember(teamId, userId, admin)
+
+Update Member of Team
+
+Updates a member of a team
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String teamId = "teamId_example"; // String | The team id
+String userId = "userId_example"; // String | The user id of the member being added to the team.
+Boolean admin = true; // Boolean | Set if the user is an admin of this team.
+try {
+    apiInstance.updateTeamMember(teamId, userId, admin);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#updateTeamMember");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **teamId** | **String**| The team id |
+ **userId** | **String**| The user id of the member being added to the team. |
+ **admin** | **Boolean**| Set if the user is an admin of this team. |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 

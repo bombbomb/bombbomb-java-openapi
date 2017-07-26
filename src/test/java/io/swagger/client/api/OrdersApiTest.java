@@ -23,29 +23,38 @@
  */
 
 
-package io.swagger.client;
+package io.swagger.client.api;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-07-26T15:26:36.973Z")
-public class Configuration {
-    private static ApiClient defaultApiClient = new ApiClient();
+import io.swagger.client.ApiException;
+import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * API tests for OrdersApi
+ */
+public class OrdersApiTest {
+
+    private final OrdersApi api = new OrdersApi();
+
+    
     /**
-     * Get the default API client, which would be used when creating API
-     * instances without providing an API client.
+     * Deletes image from user s3 store
      *
-     * @return Default API client
+     * Deletes image from user s3 store
+     *
+     * @throws ApiException
+     *          if the Api call fails
      */
-    public static ApiClient getDefaultApiClient() {
-        return defaultApiClient;
-    }
+    @Test
+    public void templateAssetDeleteTest() throws ApiException {
+        String fileName = null;
+        // api.templateAssetDelete(fileName);
 
-    /**
-     * Set the default API client, which would be used when creating API
-     * instances without providing an API client.
-     *
-     * @param apiClient API client
-     */
-    public static void setDefaultApiClient(ApiClient apiClient) {
-        defaultApiClient = apiClient;
+        // TODO: test validations
     }
+    
 }

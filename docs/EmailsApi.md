@@ -12,11 +12,11 @@ Method | HTTP request | Description
 
 <a name="createPrintingPressEmail"></a>
 # **createPrintingPressEmail**
-> createPrintingPressEmail(templateId, content, replace, videoId, subjectLine)
+> createPrintingPressEmail(templateId, content, emailId, videoId, subjectLine)
 
 Create an Email with Printing Press
 
-Prints an email using the template id and content to the users account.If a video id, is include it will replace any video placeholders with that video.
+Prints an email using the template id and content to the users account.If a video id is included, it will replace any video placeholders with that video.
 
 ### Example
 ```java
@@ -36,11 +36,11 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 EmailsApi apiInstance = new EmailsApi();
 String templateId = "templateId_example"; // String | The template id to be printed.
 String content = "content_example"; // String | The content of the email.
-Boolean replace = true; // Boolean | Set whether to replace video placeholders with video id.
+String emailId = "emailId_example"; // String | The email id to be printed to.
 String videoId = "videoId_example"; // String | A video to replace video place holders with.
 String subjectLine = "subjectLine_example"; // String | The subject line to be printed.
 try {
-    apiInstance.createPrintingPressEmail(templateId, content, replace, videoId, subjectLine);
+    apiInstance.createPrintingPressEmail(templateId, content, emailId, videoId, subjectLine);
 } catch (ApiException e) {
     System.err.println("Exception when calling EmailsApi#createPrintingPressEmail");
     e.printStackTrace();
@@ -53,7 +53,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **templateId** | **String**| The template id to be printed. |
  **content** | **String**| The content of the email. |
- **replace** | **Boolean**| Set whether to replace video placeholders with video id. |
+ **emailId** | **String**| The email id to be printed to. | [optional]
  **videoId** | **String**| A video to replace video place holders with. | [optional]
  **subjectLine** | **String**| The subject line to be printed. | [optional]
 
