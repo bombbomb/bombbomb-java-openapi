@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**getVideoRecorder**](VideosApi.md#getVideoRecorder) | **GET** /videos/live/getRecorder | Get Live Video Recorder HTML
 [**markLiveRecordingComplete**](VideosApi.md#markLiveRecordingComplete) | **POST** /videos/live/markComplete | Completes a live recording
 [**signUpload**](VideosApi.md#signUpload) | **POST** /video/signedUpload | Generate Signed Url
+[**updateVideoThumbnailV2**](VideosApi.md#updateVideoThumbnailV2) | **PUT** /videos/thumbnail | Upload thumbnail
 
 
 <a name="getVideoEncodingStatus"></a>
@@ -220,5 +221,61 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="updateVideoThumbnailV2"></a>
+# **updateVideoThumbnailV2**
+> updateVideoThumbnailV2(videoId, thumbnail, custom)
+
+Upload thumbnail
+
+Upload a new video thumbnail
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.VideosApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+VideosApi apiInstance = new VideosApi();
+String videoId = "videoId_example"; // String | The id of the video
+String thumbnail = "thumbnail_example"; // String | The thumbnail being uploaded
+Boolean custom = true; // Boolean | The default email to use.
+try {
+    apiInstance.updateVideoThumbnailV2(videoId, thumbnail, custom);
+} catch (ApiException e) {
+    System.err.println("Exception when calling VideosApi#updateVideoThumbnailV2");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **videoId** | **String**| The id of the video |
+ **thumbnail** | **String**| The thumbnail being uploaded |
+ **custom** | **Boolean**| The default email to use. | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 

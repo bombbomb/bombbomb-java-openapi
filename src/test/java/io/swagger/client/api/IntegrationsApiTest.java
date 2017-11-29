@@ -23,29 +23,38 @@
  */
 
 
-package io.swagger.client;
+package io.swagger.client.api;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-11-29T16:36:33.556Z")
-public class Configuration {
-    private static ApiClient defaultApiClient = new ApiClient();
+import io.swagger.client.ApiException;
+import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * API tests for IntegrationsApi
+ */
+public class IntegrationsApiTest {
+
+    private final IntegrationsApi api = new IntegrationsApi();
+
+    
     /**
-     * Get the default API client, which would be used when creating API
-     * instances without providing an API client.
+     * Synchronize your integration list or lists.
      *
-     * @return Default API client
+     * Synchronize your integration contact list with the service you are integrated with. If no integration code is provided, all integrations will be synchronized.
+     *
+     * @throws ApiException
+     *          if the Api call fails
      */
-    public static ApiClient getDefaultApiClient() {
-        return defaultApiClient;
-    }
+    @Test
+    public void syncUsersIntegratedListsTest() throws ApiException {
+        String integrationId = null;
+        // String response = api.syncUsersIntegratedLists(integrationId);
 
-    /**
-     * Set the default API client, which would be used when creating API
-     * instances without providing an API client.
-     *
-     * @param apiClient API client
-     */
-    public static void setDefaultApiClient(ApiClient apiClient) {
-        defaultApiClient = apiClient;
+        // TODO: test validations
     }
+    
 }

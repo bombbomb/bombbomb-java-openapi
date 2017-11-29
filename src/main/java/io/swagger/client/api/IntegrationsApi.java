@@ -45,14 +45,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OrdersApi {
+public class IntegrationsApi {
     private ApiClient apiClient;
 
-    public OrdersApi() {
+    public IntegrationsApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public OrdersApi(ApiClient apiClient) {
+    public IntegrationsApi(ApiClient apiClient) {
         this.apiClient = apiClient;
     }
 
@@ -64,26 +64,21 @@ public class OrdersApi {
         this.apiClient = apiClient;
     }
 
-    /* Build call for templateAssetDelete */
-    private com.squareup.okhttp.Call templateAssetDeleteCall(String fileName, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    /* Build call for syncUsersIntegratedLists */
+    private com.squareup.okhttp.Call syncUsersIntegratedListsCall(String integrationId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
-        
-        // verify the required parameter 'fileName' is set
-        if (fileName == null) {
-            throw new ApiException("Missing the required parameter 'fileName' when calling templateAssetDelete(Async)");
-        }
         
 
         // create path and map variables
-        String localVarPath = "/orders/templates/images".replaceAll("\\{format\\}","json");
+        String localVarPath = "/integrations/sync".replaceAll("\\{format\\}","json");
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        if (integrationId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "integration_id", integrationId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        if (fileName != null)
-        localVarFormParams.put("fileName", fileName);
 
         final String[] localVarAccepts = {
             "application/json"
@@ -110,40 +105,43 @@ public class OrdersApi {
         }
 
         String[] localVarAuthNames = new String[] { "BBOAuth2" };
-        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
     /**
-     * Deletes image from user s3 store
-     * Deletes image from user s3 store
-     * @param fileName Filename for deletion (required)
+     * Synchronize your integration list or lists.
+     * Synchronize your integration contact list with the service you are integrated with. If no integration code is provided, all integrations will be synchronized.
+     * @param integrationId The integration to sync lists for. All integrations will sync if nothing is provided. (optional)
+     * @return String
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void templateAssetDelete(String fileName) throws ApiException {
-        templateAssetDeleteWithHttpInfo(fileName);
+    public String syncUsersIntegratedLists(String integrationId) throws ApiException {
+        ApiResponse<String> resp = syncUsersIntegratedListsWithHttpInfo(integrationId);
+        return resp.getData();
     }
 
     /**
-     * Deletes image from user s3 store
-     * Deletes image from user s3 store
-     * @param fileName Filename for deletion (required)
-     * @return ApiResponse&lt;Void&gt;
+     * Synchronize your integration list or lists.
+     * Synchronize your integration contact list with the service you are integrated with. If no integration code is provided, all integrations will be synchronized.
+     * @param integrationId The integration to sync lists for. All integrations will sync if nothing is provided. (optional)
+     * @return ApiResponse&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> templateAssetDeleteWithHttpInfo(String fileName) throws ApiException {
-        com.squareup.okhttp.Call call = templateAssetDeleteCall(fileName, null, null);
-        return apiClient.execute(call);
+    public ApiResponse<String> syncUsersIntegratedListsWithHttpInfo(String integrationId) throws ApiException {
+        com.squareup.okhttp.Call call = syncUsersIntegratedListsCall(integrationId, null, null);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Deletes image from user s3 store (asynchronously)
-     * Deletes image from user s3 store
-     * @param fileName Filename for deletion (required)
+     * Synchronize your integration list or lists. (asynchronously)
+     * Synchronize your integration contact list with the service you are integrated with. If no integration code is provided, all integrations will be synchronized.
+     * @param integrationId The integration to sync lists for. All integrations will sync if nothing is provided. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call templateAssetDeleteAsync(String fileName, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call syncUsersIntegratedListsAsync(String integrationId, final ApiCallback<String> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -164,8 +162,9 @@ public class OrdersApi {
             };
         }
 
-        com.squareup.okhttp.Call call = templateAssetDeleteCall(fileName, progressListener, progressRequestListener);
-        apiClient.executeAsync(call, callback);
+        com.squareup.okhttp.Call call = syncUsersIntegratedListsCall(integrationId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
 }

@@ -4,18 +4,68 @@ All URIs are relative to *https://api.bombbomb.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getFacebookPages**](SocialsApi.md#getFacebookPages) | **GET** /socials/facebook/pages | Gets facebook pages
 [**getSocialArticleProperties**](SocialsApi.md#getSocialArticleProperties) | **GET** /socials/properties | Gets the social email properties
-[**getSocialAutoShares**](SocialsApi.md#getSocialAutoShares) | **GET** /socials/shares | Gets the auto shares from the client group assoc id
-[**getSocialPermissions**](SocialsApi.md#getSocialPermissions) | **GET** /socials/permissions | Get permissions for social integration
-[**getSocialStatus**](SocialsApi.md#getSocialStatus) | **GET** /socials/states | Gets the social state
-[**updateSocialAutoShares**](SocialsApi.md#updateSocialAutoShares) | **PUT** /socials/shares | Gets the auto shares from the client group assoc id
-[**updateSocialMessage**](SocialsApi.md#updateSocialMessage) | **PUT** /socials/message | Sets the users social message to what they typed in
-[**updateSocialStatus**](SocialsApi.md#updateSocialStatus) | **PUT** /socials/state | Updates the social state for the object
+[**getSocialAuthorizations**](SocialsApi.md#getSocialAuthorizations) | **GET** /socials/authorizations | Get authorizations for all social integration
+[**getSocialProfileProperties**](SocialsApi.md#getSocialProfileProperties) | **GET** /socials/profile | Gets the profile properties
+[**getSocialStats**](SocialsApi.md#getSocialStats) | **GET** /socials/{promptId}/stats | Get social stats for a prompt
+[**postSocialContent**](SocialsApi.md#postSocialContent) | **POST** /socials/content | Creates social content
+[**updateClientGroupSendMechanism**](SocialsApi.md#updateClientGroupSendMechanism) | **PUT** /socials/client/sendMechanism | Gets the auto shares from the client group assoc id
+[**updateFacebookPages**](SocialsApi.md#updateFacebookPages) | **PUT** /socials/facebook/pages | Updates facebook page Ids
+[**updateSocialContent**](SocialsApi.md#updateSocialContent) | **PUT** /socials/content | Updates social content
 
+
+<a name="getFacebookPages"></a>
+# **getFacebookPages**
+> getFacebookPages()
+
+Gets facebook pages
+
+Gets facebook pages by client id
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.SocialsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+SocialsApi apiInstance = new SocialsApi();
+try {
+    apiInstance.getFacebookPages();
+} catch (ApiException e) {
+    System.err.println("Exception when calling SocialsApi#getFacebookPages");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
 
 <a name="getSocialArticleProperties"></a>
 # **getSocialArticleProperties**
-> getSocialArticleProperties(jerichoId, emailId, originatorId)
+> getSocialArticleProperties(emailId)
 
 Gets the social email properties
 
@@ -37,11 +87,9 @@ OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
 BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SocialsApi apiInstance = new SocialsApi();
-String jerichoId = "jerichoId_example"; // String | associated jericho Id
 String emailId = "emailId_example"; // String | This is the email Id for the email url
-String originatorId = "originatorId_example"; // String | This is the originator Id
 try {
-    apiInstance.getSocialArticleProperties(jerichoId, emailId, originatorId);
+    apiInstance.getSocialArticleProperties(emailId);
 } catch (ApiException e) {
     System.err.println("Exception when calling SocialsApi#getSocialArticleProperties");
     e.printStackTrace();
@@ -52,9 +100,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **jerichoId** | **String**| associated jericho Id |
  **emailId** | **String**| This is the email Id for the email url |
- **originatorId** | **String**| This is the originator Id |
 
 ### Return type
 
@@ -69,13 +115,13 @@ null (empty response body)
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
-<a name="getSocialAutoShares"></a>
-# **getSocialAutoShares**
-> getSocialAutoShares(clientGroupId)
+<a name="getSocialAuthorizations"></a>
+# **getSocialAuthorizations**
+> getSocialAuthorizations(clientGroupId)
 
-Gets the auto shares from the client group assoc id
+Get authorizations for all social integration
 
-Gets the auto shares from the client group assoc id
+Get authorizations and autoshares for all social integration and has redirect for user to login
 
 ### Example
 ```java
@@ -95,9 +141,9 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 SocialsApi apiInstance = new SocialsApi();
 String clientGroupId = "clientGroupId_example"; // String | ID of the client group association
 try {
-    apiInstance.getSocialAutoShares(clientGroupId);
+    apiInstance.getSocialAuthorizations(clientGroupId);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SocialsApi#getSocialAutoShares");
+    System.err.println("Exception when calling SocialsApi#getSocialAuthorizations");
     e.printStackTrace();
 }
 ```
@@ -106,7 +152,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **clientGroupId** | **String**| ID of the client group association |
+ **clientGroupId** | **String**| ID of the client group association | [optional]
 
 ### Return type
 
@@ -121,13 +167,13 @@ null (empty response body)
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
-<a name="getSocialPermissions"></a>
-# **getSocialPermissions**
-> getSocialPermissions(socialType)
+<a name="getSocialProfileProperties"></a>
+# **getSocialProfileProperties**
+> getSocialProfileProperties(socialType)
 
-Get permissions for social integration
+Gets the profile properties
 
-Get permissions for social integration and has redirect for user to login
+Gets the social profile properties
 
 ### Example
 ```java
@@ -145,11 +191,11 @@ OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
 BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SocialsApi apiInstance = new SocialsApi();
-String socialType = "socialType_example"; // String | Type of social integration
+String socialType = "socialType_example"; // String | The social type
 try {
-    apiInstance.getSocialPermissions(socialType);
+    apiInstance.getSocialProfileProperties(socialType);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SocialsApi#getSocialPermissions");
+    System.err.println("Exception when calling SocialsApi#getSocialProfileProperties");
     e.printStackTrace();
 }
 ```
@@ -158,7 +204,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **socialType** | **String**| Type of social integration |
+ **socialType** | **String**| The social type |
 
 ### Return type
 
@@ -173,13 +219,13 @@ null (empty response body)
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
-<a name="getSocialStatus"></a>
-# **getSocialStatus**
-> getSocialStatus(originatorId)
+<a name="getSocialStats"></a>
+# **getSocialStats**
+> getSocialStats(promptId)
 
-Gets the social state
+Get social stats for a prompt
 
-Gets the social state
+Get social stats for a prompt by id
 
 ### Example
 ```java
@@ -197,11 +243,11 @@ OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
 BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SocialsApi apiInstance = new SocialsApi();
-String originatorId = "originatorId_example"; // String | associated originatorId
+String promptId = "promptId_example"; // String | ID of the prompt
 try {
-    apiInstance.getSocialStatus(originatorId);
+    apiInstance.getSocialStats(promptId);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SocialsApi#getSocialStatus");
+    System.err.println("Exception when calling SocialsApi#getSocialStats");
     e.printStackTrace();
 }
 ```
@@ -210,7 +256,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **originatorId** | **String**| associated originatorId |
+ **promptId** | **String**| ID of the prompt |
 
 ### Return type
 
@@ -225,9 +271,61 @@ null (empty response body)
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
-<a name="updateSocialAutoShares"></a>
-# **updateSocialAutoShares**
-> updateSocialAutoShares(autoShare, clientGroupId)
+<a name="postSocialContent"></a>
+# **postSocialContent**
+> postSocialContent(emailId)
+
+Creates social content
+
+Creates social content for an email
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.SocialsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+SocialsApi apiInstance = new SocialsApi();
+String emailId = "emailId_example"; // String | The email's id
+try {
+    apiInstance.postSocialContent(emailId);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SocialsApi#postSocialContent");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **emailId** | **String**| The email&#39;s id |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="updateClientGroupSendMechanism"></a>
+# **updateClientGroupSendMechanism**
+> updateClientGroupSendMechanism(sendMechanism, clientGroupId, enabled)
 
 Gets the auto shares from the client group assoc id
 
@@ -249,12 +347,13 @@ OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
 BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SocialsApi apiInstance = new SocialsApi();
-String autoShare = "autoShare_example"; // String | The social share that will auto share to
+String sendMechanism = "sendMechanism_example"; // String | The send mechanism for the prompt
 String clientGroupId = "clientGroupId_example"; // String | ID of the client group association
+String enabled = "enabled_example"; // String | Is the send mechanism enabled?
 try {
-    apiInstance.updateSocialAutoShares(autoShare, clientGroupId);
+    apiInstance.updateClientGroupSendMechanism(sendMechanism, clientGroupId, enabled);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SocialsApi#updateSocialAutoShares");
+    System.err.println("Exception when calling SocialsApi#updateClientGroupSendMechanism");
     e.printStackTrace();
 }
 ```
@@ -263,8 +362,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **autoShare** | **String**| The social share that will auto share to |
+ **sendMechanism** | **String**| The send mechanism for the prompt |
  **clientGroupId** | **String**| ID of the client group association |
+ **enabled** | **String**| Is the send mechanism enabled? | [optional]
 
 ### Return type
 
@@ -279,13 +379,13 @@ null (empty response body)
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
-<a name="updateSocialMessage"></a>
-# **updateSocialMessage**
-> updateSocialMessage(message, originatorId)
+<a name="updateFacebookPages"></a>
+# **updateFacebookPages**
+> updateFacebookPages(pageIds)
 
-Sets the users social message to what they typed in
+Updates facebook page Ids
 
-Sets the users social message to what they typed in
+Updates facebook page Ids to be sent to for prompts
 
 ### Example
 ```java
@@ -303,12 +403,11 @@ OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
 BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SocialsApi apiInstance = new SocialsApi();
-String message = "message_example"; // String | The social message the user typed in
-String originatorId = "originatorId_example"; // String | The parent id tied to the social share
+String pageIds = "pageIds_example"; // String | Page Ids for the prompt
 try {
-    apiInstance.updateSocialMessage(message, originatorId);
+    apiInstance.updateFacebookPages(pageIds);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SocialsApi#updateSocialMessage");
+    System.err.println("Exception when calling SocialsApi#updateFacebookPages");
     e.printStackTrace();
 }
 ```
@@ -317,8 +416,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **message** | **String**| The social message the user typed in |
- **originatorId** | **String**| The parent id tied to the social share |
+ **pageIds** | **String**| Page Ids for the prompt |
 
 ### Return type
 
@@ -333,13 +431,13 @@ null (empty response body)
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
-<a name="updateSocialStatus"></a>
-# **updateSocialStatus**
-> updateSocialStatus(state, originatorId)
+<a name="updateSocialContent"></a>
+# **updateSocialContent**
+> updateSocialContent(socialId, title, description, pictureUrl, suggestedMessage)
 
-Updates the social state for the object
+Updates social content
 
-Updates the social state for the object
+Updates social content for an email
 
 ### Example
 ```java
@@ -357,12 +455,15 @@ OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
 BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SocialsApi apiInstance = new SocialsApi();
-String state = "state_example"; // String | The state to set to
-String originatorId = "originatorId_example"; // String | The parent id tied to the social share
+String socialId = "socialId_example"; // String | The social id
+String title = "title_example"; // String | The title for the article
+String description = "description_example"; // String | The article description
+String pictureUrl = "pictureUrl_example"; // String | The article picture url
+String suggestedMessage = "suggestedMessage_example"; // String | The suggested message to use
 try {
-    apiInstance.updateSocialStatus(state, originatorId);
+    apiInstance.updateSocialContent(socialId, title, description, pictureUrl, suggestedMessage);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SocialsApi#updateSocialStatus");
+    System.err.println("Exception when calling SocialsApi#updateSocialContent");
     e.printStackTrace();
 }
 ```
@@ -371,8 +472,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **state** | **String**| The state to set to |
- **originatorId** | **String**| The parent id tied to the social share |
+ **socialId** | **String**| The social id |
+ **title** | **String**| The title for the article | [optional]
+ **description** | **String**| The article description | [optional]
+ **pictureUrl** | **String**| The article picture url | [optional]
+ **suggestedMessage** | **String**| The suggested message to use | [optional]
 
 ### Return type
 

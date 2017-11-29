@@ -10,11 +10,16 @@ Method | HTTP request | Description
 [**deleteSubteam**](TeamsApi.md#deleteSubteam) | **DELETE** /team/{teamId}/subteam | Delete Subteam
 [**getAllClientGroupAssociations**](TeamsApi.md#getAllClientGroupAssociations) | **GET** /team/associations/ | Lists team associations
 [**getClientGroupAssets**](TeamsApi.md#getClientGroupAssets) | **GET** /team/assets/ | Lists team assets
+[**getClientGroupStatistics**](TeamsApi.md#getClientGroupStatistics) | **GET** /team/{teamId}/stats | Get Team statistics
 [**getJerichoSends**](TeamsApi.md#getJerichoSends) | **GET** /team/{teamId}/jericho | List Jericho Sends
 [**getJerichoStats**](TeamsApi.md#getJerichoStats) | **GET** /team/{teamId}/jericho/{jerichoId}/performance | Gets Jericho performance statistics
+[**getPagedClientGroupMembers**](TeamsApi.md#getPagedClientGroupMembers) | **GET** /team/{teamId}/members | List Team Members
 [**getSubteams**](TeamsApi.md#getSubteams) | **GET** /team/{teamId}/subteam | List Subteams
+[**getTeamPromptAggregateStats**](TeamsApi.md#getTeamPromptAggregateStats) | **GET** /team/{clientGroupId}/campaign/stats | Get aggregate stats for campaigns
+[**getTeamPromptCampaigns**](TeamsApi.md#getTeamPromptCampaigns) | **GET** /team/{clientGroupId}/campaign | Get campaigns for team
 [**queueJerichoSend**](TeamsApi.md#queueJerichoSend) | **POST** /team/{teamId}/jericho | Creates a Jericho send.
 [**removeMemberFromTeam**](TeamsApi.md#removeMemberFromTeam) | **DELETE** /team/{teamId}/member/{userId} | Remove Member from Team
+[**resendTeamMemberInvitation**](TeamsApi.md#resendTeamMemberInvitation) | **POST** /team/{teamId}/{memberUserId}/rewelcome | Resend invite
 [**updateJerichoPromptSend**](TeamsApi.md#updateJerichoPromptSend) | **PUT** /team/{teamId}/jericho/{jerichoId} | Updates the Jericho Prompt Settings
 [**updateTeam**](TeamsApi.md#updateTeam) | **POST** /team/{teamId} | Update a team
 [**updateTeamMember**](TeamsApi.md#updateTeamMember) | **PUT** /team/{teamId}/member | Update Member of Team
@@ -356,6 +361,60 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
+<a name="getClientGroupStatistics"></a>
+# **getClientGroupStatistics**
+> getClientGroupStatistics(teamId, memberStatus)
+
+Get Team statistics
+
+Get top level statistic data for a Team
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String teamId = "teamId_example"; // String | The team id
+String memberStatus = "memberStatus_example"; // String | The status of members to query for
+try {
+    apiInstance.getClientGroupStatistics(teamId, memberStatus);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#getClientGroupStatistics");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **teamId** | **String**| The team id |
+ **memberStatus** | **String**| The status of members to query for | [optional] [enum: all, active, inactive, self-paid]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 <a name="getJerichoSends"></a>
 # **getJerichoSends**
 > List&lt;JerichoConfiguration&gt; getJerichoSends(teamId)
@@ -464,6 +523,70 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
+<a name="getPagedClientGroupMembers"></a>
+# **getPagedClientGroupMembers**
+> getPagedClientGroupMembers(teamId, pageSize, page, status, search, orderBy, orderDirection)
+
+List Team Members
+
+Get a paginated listing of Team members
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String teamId = "teamId_example"; // String | The team id
+String pageSize = "pageSize_example"; // String | Amount of records to return in a page.
+String page = "page_example"; // String | The page to return.
+String status = "status_example"; // String | The status type to filter by.
+String search = "search_example"; // String | Filter results with names that match the search term.
+String orderBy = "orderBy_example"; // String | Key to order results by
+String orderDirection = "orderDirection_example"; // String | ASC or DESC
+try {
+    apiInstance.getPagedClientGroupMembers(teamId, pageSize, page, status, search, orderBy, orderDirection);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#getPagedClientGroupMembers");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **teamId** | **String**| The team id |
+ **pageSize** | **String**| Amount of records to return in a page. |
+ **page** | **String**| The page to return. |
+ **status** | **String**| The status type to filter by. | [optional]
+ **search** | **String**| Filter results with names that match the search term. | [optional]
+ **orderBy** | **String**| Key to order results by | [optional] [enum: jobs, logins, videos, contacts, firstName, lastName, status, isAdmin]
+ **orderDirection** | **String**| ASC or DESC | [optional] [enum: ASC, DESC]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 <a name="getSubteams"></a>
 # **getSubteams**
 > List&lt;TeamPublicRepresentation&gt; getSubteams(teamId)
@@ -507,6 +630,116 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List&lt;TeamPublicRepresentation&gt;**](TeamPublicRepresentation.md)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="getTeamPromptAggregateStats"></a>
+# **getTeamPromptAggregateStats**
+> getTeamPromptAggregateStats(clientGroupId)
+
+Get aggregate stats for campaigns
+
+Get all the campaigns aggregate stats
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String clientGroupId = "clientGroupId_example"; // String | ID of the client group association
+try {
+    apiInstance.getTeamPromptAggregateStats(clientGroupId);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#getTeamPromptAggregateStats");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **clientGroupId** | **String**| ID of the client group association |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="getTeamPromptCampaigns"></a>
+# **getTeamPromptCampaigns**
+> getTeamPromptCampaigns(clientGroupId, searchTerm, orderBy, asc)
+
+Get campaigns for team
+
+Get campaigns for the team and their stats
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String clientGroupId = "clientGroupId_example"; // String | ID of the client group association
+String searchTerm = "searchTerm_example"; // String | The value to search for in prompt subject
+String orderBy = "orderBy_example"; // String | How to sort the column
+String asc = "asc_example"; // String | Ascending or not
+try {
+    apiInstance.getTeamPromptCampaigns(clientGroupId, searchTerm, orderBy, asc);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#getTeamPromptCampaigns");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **clientGroupId** | **String**| ID of the client group association |
+ **searchTerm** | **String**| The value to search for in prompt subject | [optional]
+ **orderBy** | **String**| How to sort the column | [optional]
+ **asc** | **String**| Ascending or not | [optional]
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
@@ -627,6 +860,61 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
+<a name="resendTeamMemberInvitation"></a>
+# **resendTeamMemberInvitation**
+> TeamPublicRepresentation resendTeamMemberInvitation(teamId, memberUserId)
+
+Resend invite
+
+Resend invitation to a member of a team
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String teamId = "teamId_example"; // String | The team id
+String memberUserId = "memberUserId_example"; // String | The user id of the member being resent an invitation.
+try {
+    TeamPublicRepresentation result = apiInstance.resendTeamMemberInvitation(teamId, memberUserId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#resendTeamMemberInvitation");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **teamId** | **String**| The team id |
+ **memberUserId** | **String**| The user id of the member being resent an invitation. |
+
+### Return type
+
+[**TeamPublicRepresentation**](TeamPublicRepresentation.md)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 <a name="updateJerichoPromptSend"></a>
 # **updateJerichoPromptSend**
 > updateJerichoPromptSend(teamId, jerichoId)
@@ -683,7 +971,7 @@ null (empty response body)
 
 <a name="updateTeam"></a>
 # **updateTeam**
-> TeamPublicRepresentation updateTeam(teamId, name)
+> TeamPublicRepresentation updateTeam(teamId, name, state)
 
 Update a team
 
@@ -707,8 +995,9 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 TeamsApi apiInstance = new TeamsApi();
 String teamId = "teamId_example"; // String | The team id
 String name = "name_example"; // String | The name of the team
+String state = "state_example"; // String | The status of the login permissions
 try {
-    TeamPublicRepresentation result = apiInstance.updateTeam(teamId, name);
+    TeamPublicRepresentation result = apiInstance.updateTeam(teamId, name, state);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling TeamsApi#updateTeam");
@@ -722,6 +1011,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **teamId** | **String**| The team id |
  **name** | **String**| The name of the team | [optional]
+ **state** | **String**| The status of the login permissions | [optional]
 
 ### Return type
 

@@ -6,12 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**accountDetails**](AccountsApi.md#accountDetails) | **GET** /accounts | Get account details.
 [**createAccount**](AccountsApi.md#createAccount) | **POST** /accounts | Create Account
+[**getClientStatistics**](AccountsApi.md#getClientStatistics) | **GET** /accounts/stats | Get Client Statistics
 [**subscriptionPurchaseAllowed**](AccountsApi.md#subscriptionPurchaseAllowed) | **GET** /accounts/purchaseable | Check if subscription purchase allowed.
 
 
 <a name="accountDetails"></a>
 # **accountDetails**
-> accountDetails(email, pw, apiKey)
+> accountDetails()
 
 Get account details.
 
@@ -25,11 +26,8 @@ Get the details of the user&#39;s account.
 
 
 AccountsApi apiInstance = new AccountsApi();
-String email = "email_example"; // String | Your login email address
-String pw = "pw_example"; // String | Your password
-String apiKey = "apiKey_example"; // String | Your Api Key
 try {
-    apiInstance.accountDetails(email, pw, apiKey);
+    apiInstance.accountDetails();
 } catch (ApiException e) {
     System.err.println("Exception when calling AccountsApi#accountDetails");
     e.printStackTrace();
@@ -37,12 +35,7 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email** | **String**| Your login email address | [optional]
- **pw** | **String**| Your password | [optional]
- **apiKey** | **String**| Your Api Key | [optional]
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -59,7 +52,7 @@ No authorization required
 
 <a name="createAccount"></a>
 # **createAccount**
-> String createAccount(teamId, firstName, lastName, emailAddress, companyName, phone, country, industry, address, city, postalCode)
+> String createAccount(teamId, firstName, lastName, emailAddress, companyName, phone, country, industry, address, city, postalCode, preventWelcomeEmail)
 
 Create Account
 
@@ -92,8 +85,9 @@ String industry = "industry_example"; // String | Industry of the user.
 String address = "address_example"; // String | Street Address of the user.
 String city = "city_example"; // String | City of the user.
 String postalCode = "postalCode_example"; // String | Postal/Zip code of the user.
+String preventWelcomeEmail = "preventWelcomeEmail_example"; // String | prevent an email with login credentials from being sent to the new account. must be set to 'true'
 try {
-    String result = apiInstance.createAccount(teamId, firstName, lastName, emailAddress, companyName, phone, country, industry, address, city, postalCode);
+    String result = apiInstance.createAccount(teamId, firstName, lastName, emailAddress, companyName, phone, country, industry, address, city, postalCode, preventWelcomeEmail);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AccountsApi#createAccount");
@@ -116,6 +110,7 @@ Name | Type | Description  | Notes
  **address** | **String**| Street Address of the user. | [optional]
  **city** | **String**| City of the user. | [optional]
  **postalCode** | **String**| Postal/Zip code of the user. | [optional]
+ **preventWelcomeEmail** | **String**| prevent an email with login credentials from being sent to the new account. must be set to &#39;true&#39; | [optional]
 
 ### Return type
 
@@ -130,9 +125,61 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
+<a name="getClientStatistics"></a>
+# **getClientStatistics**
+> getClientStatistics(clientId)
+
+Get Client Statistics
+
+Gets general statics for a Client
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.AccountsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+AccountsApi apiInstance = new AccountsApi();
+String clientId = "clientId_example"; // String | Client ID of the account to retrieve. Defaults to yourself.
+try {
+    apiInstance.getClientStatistics(clientId);
+} catch (ApiException e) {
+    System.err.println("Exception when calling AccountsApi#getClientStatistics");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **clientId** | **String**| Client ID of the account to retrieve. Defaults to yourself. | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 <a name="subscriptionPurchaseAllowed"></a>
 # **subscriptionPurchaseAllowed**
-> subscriptionPurchaseAllowed(email, pw, apiKey)
+> subscriptionPurchaseAllowed()
 
 Check if subscription purchase allowed.
 
@@ -146,11 +193,8 @@ Check whether the user can purchase a subscription.
 
 
 AccountsApi apiInstance = new AccountsApi();
-String email = "email_example"; // String | Your login email address
-String pw = "pw_example"; // String | Your password
-String apiKey = "apiKey_example"; // String | Your Api Key
 try {
-    apiInstance.subscriptionPurchaseAllowed(email, pw, apiKey);
+    apiInstance.subscriptionPurchaseAllowed();
 } catch (ApiException e) {
     System.err.println("Exception when calling AccountsApi#subscriptionPurchaseAllowed");
     e.printStackTrace();
@@ -158,12 +202,7 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email** | **String**| Your login email address | [optional]
- **pw** | **String**| Your password | [optional]
- **apiKey** | **String**| Your Api Key | [optional]
+This endpoint does not need any parameter.
 
 ### Return type
 
