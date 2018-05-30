@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **emailBody** | **String** | Video Prompt: The HTML body of the final sent email. |  [optional]
 **sendWithoutVideo** | **Boolean** | Video Prompt: Whether to send the final email if no video was recorded. |  [optional]
 **status** | **String** | The state of the send. |  [optional]
+**mediaType** | **String** | The type of media used for a social send |  [optional]
 
 
 

@@ -6,15 +6,18 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createPromptBot**](PromptsApi.md#createPromptBot) | **POST** /prompts/bots | Create a running Prompt Bot for a list
 [**createVideoEmailPrompt**](PromptsApi.md#createVideoEmailPrompt) | **POST** /prompt | Prompts user to send a video
+[**getAlternateCampaignContent**](PromptsApi.md#getAlternateCampaignContent) | **GET** /campaign/{campaignId}/content/alternate | List alternate campaign content
 [**getPendingVideoEmailPrompts**](PromptsApi.md#getPendingVideoEmailPrompts) | **GET** /prompt/pending | List pending prompts
 [**getPromptBots**](PromptsApi.md#getPromptBots) | **GET** /prompts/bots | List Prompt Bots
-[**getPromptCampaigns**](PromptsApi.md#getPromptCampaigns) | **GET** /prompts/campaigns | List Prompt Campaigns
+[**getPromptCampaigns**](PromptsApi.md#getPromptCampaigns) | **GET** /prompts/{userId}/campaigns | List Prompt Campaigns
 [**getVideoEmailPrompt**](PromptsApi.md#getVideoEmailPrompt) | **GET** /prompt/{id} | Gets a prompt
 [**getVideoEmailPrompts**](PromptsApi.md#getVideoEmailPrompts) | **GET** /prompt/ | List prompts
 [**respondToVideoEmailPrompt**](PromptsApi.md#respondToVideoEmailPrompt) | **POST** /prompt/{id}/response | Respond to a prompt
+[**syncPromptSubscriptions**](PromptsApi.md#syncPromptSubscriptions) | **POST** /prompts/campaigns/sync | Syncs Campaigns and One to Ones Subscriptions for User
 [**updatePrompt**](PromptsApi.md#updatePrompt) | **PUT** /prompts/{id} | Update Prompt
 [**updatePromptBot**](PromptsApi.md#updatePromptBot) | **PUT** /prompts/bots/{id} | Update Prompt Bot
 [**updatePromptCampaign**](PromptsApi.md#updatePromptCampaign) | **PUT** /prompts/campaigns/{id} | Update Prompt Campaign
+[**updatePromptTemplate**](PromptsApi.md#updatePromptTemplate) | **PUT** /prompts/{id}/content | Update Prompt Content
 
 
 <a name="createPromptBot"></a>
@@ -139,6 +142,58 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getAlternateCampaignContent"></a>
+# **getAlternateCampaignContent**
+> getAlternateCampaignContent(clientGroupId)
+
+List alternate campaign content
+
+Returns a list of alternate campaign content by campaign id
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PromptsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+PromptsApi apiInstance = new PromptsApi();
+String clientGroupId = "clientGroupId_example"; // String | Id for the campaign
+try {
+    apiInstance.getAlternateCampaignContent(clientGroupId);
+} catch (ApiException e) {
+    System.err.println("Exception when calling PromptsApi#getAlternateCampaignContent");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **clientGroupId** | **String**| Id for the campaign |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
 <a name="getPendingVideoEmailPrompts"></a>
@@ -442,9 +497,61 @@ No authorization required
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
+<a name="syncPromptSubscriptions"></a>
+# **syncPromptSubscriptions**
+> syncPromptSubscriptions(migrate)
+
+Syncs Campaigns and One to Ones Subscriptions for User
+
+Syncs Campaigns and One to Ones Subscriptions for User based on their profile information. The user must be a Prompt Subscriber.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PromptsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+PromptsApi apiInstance = new PromptsApi();
+Boolean migrate = true; // Boolean | After syncing, migrate away from old campaigns.
+try {
+    apiInstance.syncPromptSubscriptions(migrate);
+} catch (ApiException e) {
+    System.err.println("Exception when calling PromptsApi#syncPromptSubscriptions");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **migrate** | **Boolean**| After syncing, migrate away from old campaigns. | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 <a name="updatePrompt"></a>
 # **updatePrompt**
-> updatePrompt(id, sendMechanism, facebookMessage, twitterMessage, videoId, emailId, subject)
+> updatePrompt(id, sendMechanism, facebookMessage, twitterMessage, videoId, emailId, subject, resetCache, resetEmailContent, status)
 
 Update Prompt
 
@@ -473,8 +580,11 @@ String twitterMessage = "twitterMessage_example"; // String | The twitter messag
 String videoId = "videoId_example"; // String | The id of the video.
 String emailId = "emailId_example"; // String | The id of the email.
 String subject = "subject_example"; // String | The subject of the email
+String resetCache = "resetCache_example"; // String | The subject of the email
+String resetEmailContent = "resetEmailContent_example"; // String | The subject of the email
+String status = "status_example"; // String | The status of the prompt
 try {
-    apiInstance.updatePrompt(id, sendMechanism, facebookMessage, twitterMessage, videoId, emailId, subject);
+    apiInstance.updatePrompt(id, sendMechanism, facebookMessage, twitterMessage, videoId, emailId, subject, resetCache, resetEmailContent, status);
 } catch (ApiException e) {
     System.err.println("Exception when calling PromptsApi#updatePrompt");
     e.printStackTrace();
@@ -492,6 +602,9 @@ Name | Type | Description  | Notes
  **videoId** | **String**| The id of the video. | [optional]
  **emailId** | **String**| The id of the email. | [optional]
  **subject** | **String**| The subject of the email | [optional]
+ **resetCache** | **String**| The subject of the email | [optional]
+ **resetEmailContent** | **String**| The subject of the email | [optional]
+ **status** | **String**| The status of the prompt | [optional]
 
 ### Return type
 
@@ -625,6 +738,66 @@ Name | Type | Description  | Notes
  **personalTemplateId** | **String**| The template to use for personal feel emails. | [optional]
  **enabled** | **Boolean**| Set whether the user is able to start receiving prompts. | [optional]
  **sendMechanism** | **String**| The way to send the prompt | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="updatePromptTemplate"></a>
+# **updatePromptTemplate**
+> updatePromptTemplate(id, alternateContentId, newEmailId, ogEmailId, newExampleVideoId)
+
+Update Prompt Content
+
+Updates a Prompt Content
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PromptsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+PromptsApi apiInstance = new PromptsApi();
+String id = "id_example"; // String | The prompt's id
+String alternateContentId = "alternateContentId_example"; // String | The alternate content id
+String newEmailId = "newEmailId_example"; // String | The prompt's new email id
+String ogEmailId = "ogEmailId_example"; // String | The prompt's original email id
+String newExampleVideoId = "newExampleVideoId_example"; // String | The prompt's new tutorial video id
+try {
+    apiInstance.updatePromptTemplate(id, alternateContentId, newEmailId, ogEmailId, newExampleVideoId);
+} catch (ApiException e) {
+    System.err.println("Exception when calling PromptsApi#updatePromptTemplate");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**| The prompt&#39;s id |
+ **alternateContentId** | **String**| The alternate content id |
+ **newEmailId** | **String**| The prompt&#39;s new email id |
+ **ogEmailId** | **String**| The prompt&#39;s original email id |
+ **newExampleVideoId** | **String**| The prompt&#39;s new tutorial video id |
 
 ### Return type
 

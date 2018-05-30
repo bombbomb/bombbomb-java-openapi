@@ -7,7 +7,10 @@ Method | HTTP request | Description
 [**accountDetails**](AccountsApi.md#accountDetails) | **GET** /accounts | Get account details.
 [**createAccount**](AccountsApi.md#createAccount) | **POST** /accounts | Create Account
 [**getClientStatistics**](AccountsApi.md#getClientStatistics) | **GET** /accounts/stats | Get Client Statistics
+[**getUserCountry**](AccountsApi.md#getUserCountry) | **GET** /accounts/{clientId}/country | Gets user country
+[**resetApiKey**](AccountsApi.md#resetApiKey) | **PUT** /accounts/apikey | Reset API key
 [**subscriptionPurchaseAllowed**](AccountsApi.md#subscriptionPurchaseAllowed) | **GET** /accounts/purchaseable | Check if subscription purchase allowed.
+[**updateProfileData**](AccountsApi.md#updateProfileData) | **POST** /account/profile/ | Add profile information.
 
 
 <a name="accountDetails"></a>
@@ -21,9 +24,17 @@ Get the details of the user&#39;s account.
 ### Example
 ```java
 // Import classes:
+//import io.swagger.client.ApiClient;
 //import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
 //import io.swagger.client.api.AccountsApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 AccountsApi apiInstance = new AccountsApi();
 try {
@@ -43,7 +54,7 @@ null (empty response body)
 
 ### Authorization
 
-No authorization required
+[BBOAuth2](../README.md#BBOAuth2)
 
 ### HTTP request headers
 
@@ -85,7 +96,7 @@ String industry = "industry_example"; // String | Industry of the user.
 String address = "address_example"; // String | Street Address of the user.
 String city = "city_example"; // String | City of the user.
 String postalCode = "postalCode_example"; // String | Postal/Zip code of the user.
-String preventWelcomeEmail = "preventWelcomeEmail_example"; // String | prevent an email with login credentials from being sent to the new account. must be set to 'true'
+Boolean preventWelcomeEmail = true; // Boolean | prevent an email with login credentials from being sent to the new account. must be set to 'true'
 try {
     String result = apiInstance.createAccount(teamId, firstName, lastName, emailAddress, companyName, phone, country, industry, address, city, postalCode, preventWelcomeEmail);
     System.out.println(result);
@@ -110,7 +121,7 @@ Name | Type | Description  | Notes
  **address** | **String**| Street Address of the user. | [optional]
  **city** | **String**| City of the user. | [optional]
  **postalCode** | **String**| Postal/Zip code of the user. | [optional]
- **preventWelcomeEmail** | **String**| prevent an email with login credentials from being sent to the new account. must be set to &#39;true&#39; | [optional]
+ **preventWelcomeEmail** | **Boolean**| prevent an email with login credentials from being sent to the new account. must be set to &#39;true&#39; | [optional]
 
 ### Return type
 
@@ -127,7 +138,7 @@ Name | Type | Description  | Notes
 
 <a name="getClientStatistics"></a>
 # **getClientStatistics**
-> getClientStatistics(clientId)
+> getClientStatistics(clientId, refresh, statisticValues)
 
 Get Client Statistics
 
@@ -150,8 +161,10 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 AccountsApi apiInstance = new AccountsApi();
 String clientId = "clientId_example"; // String | Client ID of the account to retrieve. Defaults to yourself.
+Boolean refresh = true; // Boolean | Boolean for whether data returned should be from cache or not.
+String statisticValues = "statisticValues_example"; // String | Array of data that should be returned, used exclusively for cacheless data
 try {
-    apiInstance.getClientStatistics(clientId);
+    apiInstance.getClientStatistics(clientId, refresh, statisticValues);
 } catch (ApiException e) {
     System.err.println("Exception when calling AccountsApi#getClientStatistics");
     e.printStackTrace();
@@ -163,6 +176,104 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **clientId** | **String**| Client ID of the account to retrieve. Defaults to yourself. | [optional]
+ **refresh** | **Boolean**| Boolean for whether data returned should be from cache or not. | [optional]
+ **statisticValues** | **String**| Array of data that should be returned, used exclusively for cacheless data | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="getUserCountry"></a>
+# **getUserCountry**
+> getUserCountry()
+
+Gets user country
+
+Gets the users country
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.AccountsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+AccountsApi apiInstance = new AccountsApi();
+try {
+    apiInstance.getUserCountry();
+} catch (ApiException e) {
+    System.err.println("Exception when calling AccountsApi#getUserCountry");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="resetApiKey"></a>
+# **resetApiKey**
+> resetApiKey()
+
+Reset API key
+
+Resets the current user&#39;s API key and returns the new key
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.AccountsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+AccountsApi apiInstance = new AccountsApi();
+try {
+    apiInstance.resetApiKey();
+} catch (ApiException e) {
+    System.err.println("Exception when calling AccountsApi#resetApiKey");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -188,9 +299,17 @@ Check whether the user can purchase a subscription.
 ### Example
 ```java
 // Import classes:
+//import io.swagger.client.ApiClient;
 //import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
 //import io.swagger.client.api.AccountsApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 AccountsApi apiInstance = new AccountsApi();
 try {
@@ -210,7 +329,59 @@ null (empty response body)
 
 ### Authorization
 
-No authorization required
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="updateProfileData"></a>
+# **updateProfileData**
+> updateProfileData(profileData)
+
+Add profile information.
+
+Add profile information to this users account
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.AccountsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+AccountsApi apiInstance = new AccountsApi();
+String profileData = "profileData_example"; // String | Profile field information for the account
+try {
+    apiInstance.updateProfileData(profileData);
+} catch (ApiException e) {
+    System.err.println("Exception when calling AccountsApi#updateProfileData");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **profileData** | **String**| Profile field information for the account | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
 
 ### HTTP request headers
 

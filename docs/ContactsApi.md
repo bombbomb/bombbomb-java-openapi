@@ -284,11 +284,11 @@ null (empty response body)
 
 <a name="deleteContacts"></a>
 # **deleteContacts**
-> deleteContacts(listId)
+> deleteContacts(listId, contactIds)
 
 Delete Contacts
 
-Delete contacts
+Delete all contacts within a list, or provide a comma separated list of contactIds to delete.
 
 ### Example
 ```java
@@ -307,8 +307,9 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 ContactsApi apiInstance = new ContactsApi();
 String listId = "listId_example"; // String | The list of contacts to be deleted.
+String contactIds = "contactIds_example"; // String | comma separated list of contact ids to delete
 try {
-    apiInstance.deleteContacts(listId);
+    apiInstance.deleteContacts(listId, contactIds);
 } catch (ApiException e) {
     System.err.println("Exception when calling ContactsApi#deleteContacts");
     e.printStackTrace();
@@ -319,7 +320,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **listId** | **String**| The list of contacts to be deleted. |
+ **listId** | **String**| The list of contacts to be deleted. | [optional]
+ **contactIds** | **String**| comma separated list of contact ids to delete | [optional]
 
 ### Return type
 

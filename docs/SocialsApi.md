@@ -10,7 +10,10 @@ Method | HTTP request | Description
 [**getSocialProfileProperties**](SocialsApi.md#getSocialProfileProperties) | **GET** /socials/profile | Gets the profile properties
 [**getSocialStats**](SocialsApi.md#getSocialStats) | **GET** /socials/{promptId}/stats | Get social stats for a prompt
 [**postSocialContent**](SocialsApi.md#postSocialContent) | **POST** /socials/content | Creates social content
+[**retrySocialSend**](SocialsApi.md#retrySocialSend) | **POST** /socials/send/retry | Sends social content
+[**sendSocial**](SocialsApi.md#sendSocial) | **POST** /socials/send | Sends social content
 [**updateClientGroupSendMechanism**](SocialsApi.md#updateClientGroupSendMechanism) | **PUT** /socials/client/sendMechanism | Gets the auto shares from the client group assoc id
+[**updateClientGroupsSendMechanism**](SocialsApi.md#updateClientGroupsSendMechanism) | **PUT** /socials/client/sendMechanisms | Toggles the prompt campaigns in a users account
 [**updateFacebookPages**](SocialsApi.md#updateFacebookPages) | **PUT** /socials/facebook/pages | Updates facebook page Ids
 [**updateSocialContent**](SocialsApi.md#updateSocialContent) | **PUT** /socials/content | Updates social content
 
@@ -65,7 +68,7 @@ null (empty response body)
 
 <a name="getSocialArticleProperties"></a>
 # **getSocialArticleProperties**
-> getSocialArticleProperties(emailId)
+> getSocialArticleProperties(emailId, socialContentId)
 
 Gets the social email properties
 
@@ -88,8 +91,9 @@ BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SocialsApi apiInstance = new SocialsApi();
 String emailId = "emailId_example"; // String | This is the email Id for the email url
+String socialContentId = "socialContentId_example"; // String | This is the social content Id
 try {
-    apiInstance.getSocialArticleProperties(emailId);
+    apiInstance.getSocialArticleProperties(emailId, socialContentId);
 } catch (ApiException e) {
     System.err.println("Exception when calling SocialsApi#getSocialArticleProperties");
     e.printStackTrace();
@@ -101,6 +105,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **emailId** | **String**| This is the email Id for the email url |
+ **socialContentId** | **String**| This is the social content Id |
 
 ### Return type
 
@@ -323,6 +328,112 @@ null (empty response body)
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
+<a name="retrySocialSend"></a>
+# **retrySocialSend**
+> retrySocialSend(promptId)
+
+Sends social content
+
+Sends social content that failed for a user via their associated prompt
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.SocialsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+SocialsApi apiInstance = new SocialsApi();
+String promptId = "promptId_example"; // String | The prompt id
+try {
+    apiInstance.retrySocialSend(promptId);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SocialsApi#retrySocialSend");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **promptId** | **String**| The prompt id |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="sendSocial"></a>
+# **sendSocial**
+> sendSocial(promptId, socialType)
+
+Sends social content
+
+Sends social content for a user via their associated prompt
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.SocialsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+SocialsApi apiInstance = new SocialsApi();
+String promptId = "promptId_example"; // String | The prompt id
+String socialType = "socialType_example"; // String | The destination for social content
+try {
+    apiInstance.sendSocial(promptId, socialType);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SocialsApi#sendSocial");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **promptId** | **String**| The prompt id |
+ **socialType** | **String**| The destination for social content |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
 <a name="updateClientGroupSendMechanism"></a>
 # **updateClientGroupSendMechanism**
 > updateClientGroupSendMechanism(sendMechanism, clientGroupId, enabled)
@@ -365,6 +476,60 @@ Name | Type | Description  | Notes
  **sendMechanism** | **String**| The send mechanism for the prompt |
  **clientGroupId** | **String**| ID of the client group association |
  **enabled** | **String**| Is the send mechanism enabled? | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="updateClientGroupsSendMechanism"></a>
+# **updateClientGroupsSendMechanism**
+> updateClientGroupsSendMechanism(sendMechanism, enabled)
+
+Toggles the prompt campaigns in a users account
+
+Toggles the prompt campaigns in a users account for a social integrations on or off
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.SocialsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+SocialsApi apiInstance = new SocialsApi();
+String sendMechanism = "sendMechanism_example"; // String | The send mechanism for the prompt
+String enabled = "enabled_example"; // String | Is the send mechanism enabled?
+try {
+    apiInstance.updateClientGroupsSendMechanism(sendMechanism, enabled);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SocialsApi#updateClientGroupsSendMechanism");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sendMechanism** | **String**| The send mechanism for the prompt |
+ **enabled** | **String**| Is the send mechanism enabled? |
 
 ### Return type
 

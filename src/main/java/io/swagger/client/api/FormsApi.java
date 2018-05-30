@@ -45,14 +45,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OrdersApi {
+public class FormsApi {
     private ApiClient apiClient;
 
-    public OrdersApi() {
+    public FormsApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public OrdersApi(ApiClient apiClient) {
+    public FormsApi(ApiClient apiClient) {
         this.apiClient = apiClient;
     }
 
@@ -64,26 +64,25 @@ public class OrdersApi {
         this.apiClient = apiClient;
     }
 
-    /* Build call for templateAssetDelete */
-    private com.squareup.okhttp.Call templateAssetDeleteCall(String fileName, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    /* Build call for getFormTrackingAsCsv */
+    private com.squareup.okhttp.Call getFormTrackingAsCsvCall(String id, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'fileName' is set
-        if (fileName == null) {
-            throw new ApiException("Missing the required parameter 'fileName' when calling templateAssetDelete(Async)");
+        // verify the required parameter 'id' is set
+        if (id == null) {
+            throw new ApiException("Missing the required parameter 'id' when calling getFormTrackingAsCsv(Async)");
         }
         
 
         // create path and map variables
-        String localVarPath = "/orders/templates/images".replaceAll("\\{format\\}","json");
+        String localVarPath = "/forms/{id}/tracking/export".replaceAll("\\{format\\}","json")
+        .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        if (fileName != null)
-        localVarFormParams.put("fileName", fileName);
 
         final String[] localVarAccepts = {
             "application/json"
@@ -110,40 +109,40 @@ public class OrdersApi {
         }
 
         String[] localVarAuthNames = new String[] { "BBOAuth2" };
-        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
     /**
-     * Deletes image from user s3 store
-     * Deletes image from user s3 store
-     * @param fileName Filename for deletion (required)
+     * Get csv
+     * Get form tracking as csv
+     * @param id Id of the form (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void templateAssetDelete(String fileName) throws ApiException {
-        templateAssetDeleteWithHttpInfo(fileName);
+    public void getFormTrackingAsCsv(String id) throws ApiException {
+        getFormTrackingAsCsvWithHttpInfo(id);
     }
 
     /**
-     * Deletes image from user s3 store
-     * Deletes image from user s3 store
-     * @param fileName Filename for deletion (required)
+     * Get csv
+     * Get form tracking as csv
+     * @param id Id of the form (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> templateAssetDeleteWithHttpInfo(String fileName) throws ApiException {
-        com.squareup.okhttp.Call call = templateAssetDeleteCall(fileName, null, null);
+    public ApiResponse<Void> getFormTrackingAsCsvWithHttpInfo(String id) throws ApiException {
+        com.squareup.okhttp.Call call = getFormTrackingAsCsvCall(id, null, null);
         return apiClient.execute(call);
     }
 
     /**
-     * Deletes image from user s3 store (asynchronously)
-     * Deletes image from user s3 store
-     * @param fileName Filename for deletion (required)
+     * Get csv (asynchronously)
+     * Get form tracking as csv
+     * @param id Id of the form (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call templateAssetDeleteAsync(String fileName, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call getFormTrackingAsCsvAsync(String id, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -164,7 +163,7 @@ public class OrdersApi {
             };
         }
 
-        com.squareup.okhttp.Call call = templateAssetDeleteCall(fileName, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getFormTrackingAsCsvCall(id, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }

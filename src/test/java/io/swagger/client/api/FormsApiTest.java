@@ -23,8 +23,38 @@
  */
 
 
-package io.swagger.client.auth;
+package io.swagger.client.api;
 
-public enum OAuthFlow {
-    accessCode, implicit, password, application
+import io.swagger.client.ApiException;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * API tests for FormsApi
+ */
+public class FormsApiTest {
+
+    private final FormsApi api = new FormsApi();
+
+    
+    /**
+     * Get csv
+     *
+     * Get form tracking as csv
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getFormTrackingAsCsvTest() throws ApiException {
+        String id = null;
+        // api.getFormTrackingAsCsv(id);
+
+        // TODO: test validations
+    }
+    
 }
