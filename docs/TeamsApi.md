@@ -16,6 +16,8 @@ Method | HTTP request | Description
 [**getJerichoSends**](TeamsApi.md#getJerichoSends) | **GET** /team/{teamId}/jericho | List Jericho Sends
 [**getJerichoStats**](TeamsApi.md#getJerichoStats) | **GET** /team/{teamId}/jericho/{jerichoId}/performance | Gets Jericho performance statistics
 [**getPagedClientGroupMembers**](TeamsApi.md#getPagedClientGroupMembers) | **GET** /team/{teamId}/members | List Team Members
+[**getPromptMonthlyStats**](TeamsApi.md#getPromptMonthlyStats) | **GET** /team/{month}/{year}/monthStats | Jericho Monthly Stats
+[**getPromptOverview**](TeamsApi.md#getPromptOverview) | **GET** /team/promptOverview | Get Prompt Overview
 [**getSubteams**](TeamsApi.md#getSubteams) | **GET** /team/{teamId}/subteam | List Subteams
 [**getTeamPromptAggregateStats**](TeamsApi.md#getTeamPromptAggregateStats) | **GET** /team/{clientGroupId}/campaign/stats | Get aggregate stats for campaigns
 [**getTeamPromptCampaigns**](TeamsApi.md#getTeamPromptCampaigns) | **GET** /team/{clientGroupId}/campaign | Get campaigns for team
@@ -710,13 +712,13 @@ null (empty response body)
  - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: application/json
 
-<a name="getSubteams"></a>
-# **getSubteams**
-> List&lt;TeamPublicRepresentation&gt; getSubteams(teamId)
+<a name="getPromptMonthlyStats"></a>
+# **getPromptMonthlyStats**
+> String getPromptMonthlyStats(month, year)
 
-List Subteams
+Jericho Monthly Stats
 
-Returns a collection of subteams for a parent team
+Jericho Monthly Stats
 
 ### Example
 ```java
@@ -732,6 +734,102 @@ ApiClient defaultClient = Configuration.getDefaultApiClient();
 // Configure OAuth2 access token for authorization: BBOAuth2
 OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
 BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+String month = "month_example"; // String | The month whose Jericho sends you wish to see.
+String year = "year_example"; // String | The year whose Jericho sends you wish to see.
+try {
+    String result = apiInstance.getPromptMonthlyStats(month, year);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#getPromptMonthlyStats");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **month** | **String**| The month whose Jericho sends you wish to see. |
+ **year** | **String**| The year whose Jericho sends you wish to see. |
+
+### Return type
+
+**String**
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="getPromptOverview"></a>
+# **getPromptOverview**
+> String getPromptOverview()
+
+Get Prompt Overview
+
+Get Prompt Overview
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.TeamsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: BBOAuth2
+OAuth BBOAuth2 = (OAuth) defaultClient.getAuthentication("BBOAuth2");
+BBOAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+TeamsApi apiInstance = new TeamsApi();
+try {
+    String result = apiInstance.getPromptOverview();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeamsApi#getPromptOverview");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+[BBOAuth2](../README.md#BBOAuth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+<a name="getSubteams"></a>
+# **getSubteams**
+> List&lt;TeamPublicRepresentation&gt; getSubteams(teamId)
+
+List Subteams
+
+Returns a collection of subteams for a parent team
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.TeamsApi;
+
 
 TeamsApi apiInstance = new TeamsApi();
 String teamId = "teamId_example"; // String | The team id
@@ -756,7 +854,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BBOAuth2](../README.md#BBOAuth2)
+No authorization required
 
 ### HTTP request headers
 

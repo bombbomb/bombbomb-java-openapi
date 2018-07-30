@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **totalPages** | **Integer** |  |  [optional]
-**items** | [**List&lt;InlineResponse200Items&gt;**](InlineResponse200Items.md) |  |  [optional]
+**items** | [**List&lt;ClientGroupAssetMetaData&gt;**](ClientGroupAssetMetaData.md) |  |  [optional]
 
 
 

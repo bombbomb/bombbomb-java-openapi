@@ -27,8 +27,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import io.swagger.client.model.Curriculum;
-import io.swagger.client.model.CurriculumWithProgress;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,14 +34,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CurriculumApi {
+public class UsersApi {
     private ApiClient apiClient;
 
-    public CurriculumApi() {
+    public UsersApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public CurriculumApi(ApiClient apiClient) {
+    public UsersApi(ApiClient apiClient) {
         this.apiClient = apiClient;
     }
 
@@ -56,136 +54,17 @@ public class CurriculumApi {
     }
 
     /**
-     * Build call for getCurricula
-     * @param includeProgress Whether to return progress with the curriculum. (optional)
+     * Build call for getClientContactInformation
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCurriculaCall(Boolean includeProgress, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getClientContactInformationCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/curricula/";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (includeProgress != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("includeProgress", includeProgress));
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-        final String[] localVarContentTypes = {
-            "application/x-www-form-urlencoded"
-        };
-        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                    return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
-                }
-            });
-        }
-
-        String[] localVarAuthNames = new String[] { "BBOAuth2" };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getCurriculaValidateBeforeCall(Boolean includeProgress, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
-
-        com.squareup.okhttp.Call call = getCurriculaCall(includeProgress, progressListener, progressRequestListener);
-        return call;
-
-    }
-
-    /**
-     * Get Curricula
-     * Get Curricula, optionally with progress included.
-     * @param includeProgress Whether to return progress with the curriculum. (optional)
-     * @return List&lt;Curriculum&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public List<Curriculum> getCurricula(Boolean includeProgress) throws ApiException {
-        ApiResponse<List<Curriculum>> resp = getCurriculaWithHttpInfo(includeProgress);
-        return resp.getData();
-    }
-
-    /**
-     * Get Curricula
-     * Get Curricula, optionally with progress included.
-     * @param includeProgress Whether to return progress with the curriculum. (optional)
-     * @return ApiResponse&lt;List&lt;Curriculum&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public ApiResponse<List<Curriculum>> getCurriculaWithHttpInfo(Boolean includeProgress) throws ApiException {
-        com.squareup.okhttp.Call call = getCurriculaValidateBeforeCall(includeProgress, null, null);
-        Type localVarReturnType = new TypeToken<List<Curriculum>>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
-    }
-
-    /**
-     * Get Curricula (asynchronously)
-     * Get Curricula, optionally with progress included.
-     * @param includeProgress Whether to return progress with the curriculum. (optional)
-     * @param callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     */
-    public com.squareup.okhttp.Call getCurriculaAsync(Boolean includeProgress, final ApiCallback<List<Curriculum>> callback) throws ApiException {
-
-        ProgressResponseBody.ProgressListener progressListener = null;
-        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-        if (callback != null) {
-            progressListener = new ProgressResponseBody.ProgressListener() {
-                @Override
-                public void update(long bytesRead, long contentLength, boolean done) {
-                    callback.onDownloadProgress(bytesRead, contentLength, done);
-                }
-            };
-
-            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
-                @Override
-                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-                    callback.onUploadProgress(bytesWritten, contentLength, done);
-                }
-            };
-        }
-
-        com.squareup.okhttp.Call call = getCurriculaValidateBeforeCall(includeProgress, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List<Curriculum>>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
-        return call;
-    }
-    /**
-     * Build call for getUserCurriculumWithProgress
-     * @param progressListener Progress listener
-     * @param progressRequestListener Progress request listener
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     */
-    public com.squareup.okhttp.Call getUserCurriculumWithProgressCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/curriculum/getForUserWithProgress";
+        String localVarPath = "/clients/contact/information";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -223,45 +102,42 @@ public class CurriculumApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getUserCurriculumWithProgressValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getClientContactInformationValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        com.squareup.okhttp.Call call = getUserCurriculumWithProgressCall(progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getClientContactInformationCall(progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
-     * Get Detailed For User
-     * Get all curricula for user including progress for each curriculum.
-     * @return List&lt;CurriculumWithProgress&gt;
+     * Get client contact information.
+     * Get the client contact information of the user&#39;s account.
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public List<CurriculumWithProgress> getUserCurriculumWithProgress() throws ApiException {
-        ApiResponse<List<CurriculumWithProgress>> resp = getUserCurriculumWithProgressWithHttpInfo();
-        return resp.getData();
+    public void getClientContactInformation() throws ApiException {
+        getClientContactInformationWithHttpInfo();
     }
 
     /**
-     * Get Detailed For User
-     * Get all curricula for user including progress for each curriculum.
-     * @return ApiResponse&lt;List&lt;CurriculumWithProgress&gt;&gt;
+     * Get client contact information.
+     * Get the client contact information of the user&#39;s account.
+     * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<List<CurriculumWithProgress>> getUserCurriculumWithProgressWithHttpInfo() throws ApiException {
-        com.squareup.okhttp.Call call = getUserCurriculumWithProgressValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<List<CurriculumWithProgress>>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+    public ApiResponse<Void> getClientContactInformationWithHttpInfo() throws ApiException {
+        com.squareup.okhttp.Call call = getClientContactInformationValidateBeforeCall(null, null);
+        return apiClient.execute(call);
     }
 
     /**
-     * Get Detailed For User (asynchronously)
-     * Get all curricula for user including progress for each curriculum.
+     * Get client contact information. (asynchronously)
+     * Get the client contact information of the user&#39;s account.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getUserCurriculumWithProgressAsync(final ApiCallback<List<CurriculumWithProgress>> callback) throws ApiException {
+    public com.squareup.okhttp.Call getClientContactInformationAsync(final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -282,9 +158,117 @@ public class CurriculumApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getUserCurriculumWithProgressValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List<CurriculumWithProgress>>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        com.squareup.okhttp.Call call = getClientContactInformationValidateBeforeCall(progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
+     * Build call for getUserProfileInfo
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call getUserProfileInfoCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/users/profile/information";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/x-www-form-urlencoded"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "BBOAuth2" };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getUserProfileInfoValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+
+        com.squareup.okhttp.Call call = getUserProfileInfoCall(progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Get user profile information.
+     * Get the users profile information.
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void getUserProfileInfo() throws ApiException {
+        getUserProfileInfoWithHttpInfo();
+    }
+
+    /**
+     * Get user profile information.
+     * Get the users profile information.
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> getUserProfileInfoWithHttpInfo() throws ApiException {
+        com.squareup.okhttp.Call call = getUserProfileInfoValidateBeforeCall(null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Get user profile information. (asynchronously)
+     * Get the users profile information.
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call getUserProfileInfoAsync(final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = getUserProfileInfoValidateBeforeCall(progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
         return call;
     }
 }

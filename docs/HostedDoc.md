@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **fileName** | **String** | docs file name. |  [optional]
 **shortUrl** | **String** | The doc&#39;s short url. |  [optional]
 **longUrl** | **String** | The doc&#39;s long url. |  [optional]
-**uploadDate** | [**DateTime**](DateTime.md) | The doc&#39;s upload date. |  [optional]
+**uploadDate** | [**OffsetDateTime**](OffsetDateTime.md) | The doc&#39;s upload date. |  [optional]
 
 
 

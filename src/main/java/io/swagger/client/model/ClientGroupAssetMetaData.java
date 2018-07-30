@@ -24,30 +24,32 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * The TeamPublicRepresentation class
+ * ClientGroupAssetMetaData
  */
-@ApiModel(description = "The TeamPublicRepresentation class")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T19:45:38.826Z")
-public class TeamPublicRepresentation {
+public class ClientGroupAssetMetaData {
   @SerializedName("id")
   private String id = null;
 
   @SerializedName("name")
   private String name = null;
 
-  @SerializedName("createdDate")
-  private String createdDate = null;
+  @SerializedName("userId")
+  private String userId = null;
 
-  public TeamPublicRepresentation id(String id) {
+  @SerializedName("thumbUrl")
+  private String thumbUrl = null;
+
+  public ClientGroupAssetMetaData id(String id) {
     this.id = id;
     return this;
   }
 
    /**
-   * The id of the team
+   * Get id
    * @return id
   **/
-  @ApiModelProperty(value = "The id of the team")
+  @ApiModelProperty(value = "")
   public String getId() {
     return id;
   }
@@ -56,16 +58,16 @@ public class TeamPublicRepresentation {
     this.id = id;
   }
 
-  public TeamPublicRepresentation name(String name) {
+  public ClientGroupAssetMetaData name(String name) {
     this.name = name;
     return this;
   }
 
    /**
-   * The name of the team
+   * Get name
    * @return name
   **/
-  @ApiModelProperty(value = "The name of the team")
+  @ApiModelProperty(value = "")
   public String getName() {
     return name;
   }
@@ -74,22 +76,40 @@ public class TeamPublicRepresentation {
     this.name = name;
   }
 
-  public TeamPublicRepresentation createdDate(String createdDate) {
-    this.createdDate = createdDate;
+  public ClientGroupAssetMetaData userId(String userId) {
+    this.userId = userId;
     return this;
   }
 
    /**
-   * The date the team was created
-   * @return createdDate
+   * Get userId
+   * @return userId
   **/
-  @ApiModelProperty(value = "The date the team was created")
-  public String getCreatedDate() {
-    return createdDate;
+  @ApiModelProperty(value = "")
+  public String getUserId() {
+    return userId;
   }
 
-  public void setCreatedDate(String createdDate) {
-    this.createdDate = createdDate;
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+  public ClientGroupAssetMetaData thumbUrl(String thumbUrl) {
+    this.thumbUrl = thumbUrl;
+    return this;
+  }
+
+   /**
+   * Get thumbUrl
+   * @return thumbUrl
+  **/
+  @ApiModelProperty(value = "")
+  public String getThumbUrl() {
+    return thumbUrl;
+  }
+
+  public void setThumbUrl(String thumbUrl) {
+    this.thumbUrl = thumbUrl;
   }
 
 
@@ -101,26 +121,28 @@ public class TeamPublicRepresentation {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TeamPublicRepresentation teamPublicRepresentation = (TeamPublicRepresentation) o;
-    return Objects.equals(this.id, teamPublicRepresentation.id) &&
-        Objects.equals(this.name, teamPublicRepresentation.name) &&
-        Objects.equals(this.createdDate, teamPublicRepresentation.createdDate);
+    ClientGroupAssetMetaData clientGroupAssetMetaData = (ClientGroupAssetMetaData) o;
+    return Objects.equals(this.id, clientGroupAssetMetaData.id) &&
+        Objects.equals(this.name, clientGroupAssetMetaData.name) &&
+        Objects.equals(this.userId, clientGroupAssetMetaData.userId) &&
+        Objects.equals(this.thumbUrl, clientGroupAssetMetaData.thumbUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, createdDate);
+    return Objects.hash(id, name, userId, thumbUrl);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TeamPublicRepresentation {\n");
+    sb.append("class ClientGroupAssetMetaData {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    thumbUrl: ").append(toIndentedString(thumbUrl)).append("\n");
     sb.append("}");
     return sb.toString();
   }

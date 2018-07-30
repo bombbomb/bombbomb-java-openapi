@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  |  [optional]
 **clientGroupId** | **String** |  |  [optional]
-**sendDate** | [**DateTime**](DateTime.md) | When the email should be sent. |  [optional]
+**sendDate** | [**OffsetDateTime**](OffsetDateTime.md) | When the email should be sent. |  [optional]
 **isPrompt** | **Boolean** | Video Prompt: Determines whether this is a static or prompted send. | 
 **printToTemplate** | **Boolean** | Controls whether or not the content is printed into a template. |  [optional]
 **emailId** | **String** | Static send: The Email to send on behalf of the group members. |  [optional]
@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **sendWithoutVideo** | **Boolean** | Video Prompt: Whether to send the final email if no video was recorded. |  [optional]
 **status** | **String** | The state of the send. |  [optional]
 **mediaType** | **String** | The type of media used for a social send |  [optional]
+**customInitialEmailSubjectLine** | **String** | The custom subject line for the prompt initial email |  [optional]
 
 
 

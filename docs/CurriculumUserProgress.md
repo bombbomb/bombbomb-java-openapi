@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **userId** | **String** | User Id |  [optional]
 **curriculumItemId** | **String** | Curriculum Item Id |  [optional]
 **curriculumId** | **String** | Curriculum Id |  [optional]
-**completedDate** | [**DateTime**](DateTime.md) | When the final email is scheduled to be sent |  [optional]
+**completedDate** | [**OffsetDateTime**](OffsetDateTime.md) | When the final email is scheduled to be sent |  [optional]
 
 
 
