@@ -30,7 +30,7 @@ import org.threeten.bp.OffsetDateTime;
  * Configures a single prompt which asks a user to record a video into an outgoing email.
  */
 @ApiModel(description = "Configures a single prompt which asks a user to record a video into an outgoing email.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T19:45:38.826Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T21:11:01.919Z")
 public class VideoEmailPrompt {
   @SerializedName("templateId")
   private String templateId = null;

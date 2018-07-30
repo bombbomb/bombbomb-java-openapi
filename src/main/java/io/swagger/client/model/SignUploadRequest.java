@@ -28,7 +28,7 @@ import org.threeten.bp.OffsetDateTime;
  * The SignUploadRequest class
  */
 @ApiModel(description = "The SignUploadRequest class")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T19:45:38.826Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T21:11:01.919Z")
 public class SignUploadRequest {
   @SerializedName("expiration")
   private OffsetDateTime expiration = null;

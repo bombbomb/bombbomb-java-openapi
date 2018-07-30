@@ -27,7 +27,7 @@ import java.io.IOException;
  * The BBWebHook class
  */
 @ApiModel(description = "The BBWebHook class")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T19:45:38.826Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T21:11:01.919Z")
 public class BBWebHook {
   @SerializedName("userId")
   private String userId = null;

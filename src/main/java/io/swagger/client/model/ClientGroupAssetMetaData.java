@@ -26,7 +26,7 @@ import java.io.IOException;
 /**
  * ClientGroupAssetMetaData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T19:45:38.826Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T21:11:01.919Z")
 public class ClientGroupAssetMetaData {
   @SerializedName("id")
   private String id = null;

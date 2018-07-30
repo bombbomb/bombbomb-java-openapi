@@ -28,7 +28,7 @@ import org.threeten.bp.OffsetDateTime;
  * The CurriculumUserProgress class
  */
 @ApiModel(description = "The CurriculumUserProgress class")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T19:45:38.826Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T21:11:01.919Z")
 public class CurriculumUserProgress {
   @SerializedName("id")
   private String id = null;

@@ -30,7 +30,7 @@ import org.threeten.bp.OffsetDateTime;
  * The Prompt\\SocialPrompt class
  */
 @ApiModel(description = "The Prompt\\SocialPrompt class")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T19:45:38.826Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-30T21:11:01.919Z")
 public class PromptSocialPrompt {
   @SerializedName("id")
   private String id = null;
